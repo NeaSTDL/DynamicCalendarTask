@@ -11,8 +11,8 @@
       
       var handler = null,
           dom = {
-            buttons: {}
-            fields: {}
+            buttons: {},
+            fields: []
           };
 
       function init(me){
@@ -33,9 +33,46 @@
         dom.buttons.submit.on("click", onSubmitButtonClick);
       }
 
+      function _clearErrorMessages(){
+        $(".errorMessage").html("");
+        $(".errorMessage").removeClass("shown");
+      }
+
+      function _validateFields(){
+        if(dom.fields.startDate.val() == ""){
+          _showErrorMessage("startDate", "Please, select a date value!");
+          return false;
+        }
+        if(dom.fields.noOfDays.val() == ""){
+          _showErrorMessage("noOfDays", "Please, input a number!");
+          return false;
+        }
+        if(dom.fields.noOfDays.val() < 1){
+          _showErrorMessage("noOfDays", "Please, input a value higher or equal than one!");
+          return false;
+        }
+        if(dom.fields.countryCode.val() == ""){
+          _showErrorMessage("countryCode", "Please, input a country code string!");
+          return false;
+        }
+        return true;
+      }
+
+      function _showErrorMessage(field, message){
+        $(".errorMessage[for='" + field + "']").addClass("shown");
+        $(".errorMessage[for='" + field + "']").html(message);        
+      }
+
       function onSubmitButtonClick(event){
         event.preventDefault();
-        console.log("Button clicked");
+        _clearErrorMessages();
+        if(_validateFields()){
+          _calculateCalendars();
+        }
+      }
+
+      function _calculateCalendars(){
+        console.log("Calculated calendars");
       }
 
       return {
