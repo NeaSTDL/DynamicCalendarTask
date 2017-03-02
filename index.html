@@ -11,7 +11,6 @@
 		<script src="plugins/moment/moment.min.js"></script>
 		<script src="js/dct.core.js"></script>
 		<script src="js/dct.component.calendar-form.js"></script>
-		<script src="js/dct.view.main.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -22,7 +21,7 @@
 							<h2>Prosoft Nearshore</h2>
 							<h4>Dynamic Markup Test</h4>
 						</div>
-						<form>
+						<form id="calendarForm">
 							<div class="form-group">
 								<label for="startDate">Start Date</label>
 								<input type="date" class="form-control" id="startDate">
@@ -49,6 +48,9 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="scripts">
+			<script src="js/dct.view.main.js"></script>
 		</div>
 	</body>
 </html>
