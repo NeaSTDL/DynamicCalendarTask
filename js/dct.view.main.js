@@ -1,6 +1,32 @@
 (function(App, View, Component){
   'use strict';
 
-  // Write application logic
+  var Wrapper = {
+    Component: {}
+  };
 
+  function define(){
+    if(View && !View.Main){
+      construct();
+    }
+  }
+
+  function construct(){
+    View.Main = Wrapper;
+  }
+
+  function init(){
+    _initCalendarForm();
+  }
+
+  function _initCalendarForm(){
+    var element = $("#calendarForm");
+    if(Component.CalendarForm){
+      Wrapper.Component.CalendarForm = new Component.CalendarForm( Wrapper );
+      Wrapper.Component.CalendarForm.Init(element);
+    }
+  }
+
+  define();
+  init();
 })(DynamicCalendarTask, DynamicCalendarTask.View, DynamicCalendarTask.Component);
