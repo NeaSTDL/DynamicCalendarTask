@@ -11,6 +11,7 @@
       
       var handler = null,
           config = {},
+          component = {},
           dom = {
             buttons: {},
             fields: []
@@ -21,11 +22,31 @@
 
         _initConfiguration(settings);
         _initDomElements();
+        _initComponents();
         _initEventBindings();
       }
 
       function _initConfiguration(settings){
         $.extend(true, config, settings);
+      }
+
+      function _initComponents(){
+        _initHolidayApi();
+      }
+
+      function _initHolidayApi(){
+        var element = handler,
+            settings = {
+              key: {
+                test: "0c259d58-a80a-43c6-a091-5e4f8e0692a4",
+                live: "657b3196-9b22-4d2c-9e21-20afcb564b77",
+              },
+              mode: "live"
+            };
+        if(Component.HolidayApi){
+          component.HolidayApi = new Component.HolidayApi( View );
+          component.HolidayApi.Init(element, settings);
+        }
       }
 
       function _initDomElements(){
@@ -74,7 +95,23 @@
         _clearErrorMessages();
         if(_validateFields()){
           _calculateCalendars();
+          component.HolidayApi.Get({
+            country: dom.fields.countryCode.val(),
+            year: moment(dom.fields.startDate.val()).year(),
+          }, onRequestSuccess, onRequestError);
         }
+      }
+
+      function onRequestSuccess(data, status, xhr){
+        var days = Object.keys(data.holidays);
+        days.map(function(element, index){
+          $("td[data-date=" + element + "]").addClass("holiday");
+        });
+      }
+
+      function onRequestError(xhr, status, err){
+        $(".errorMessage.resultErrors").html("An error happened! To see holidays, please try again later...");
+        $(".errorMessage.resultErrors").addClass("shown");
       }
 
       function _calculateCalendars(){
@@ -137,7 +174,7 @@
               } else {
                 item.addClass("weekday");
               }
-              item.html(moment(currentDate).date());
+              item.attr("data-date",moment(currentDate).format("YYYY-MM-DD") ).html(moment(currentDate).date());
               currentDate = moment(currentDate).add(1, "day").format();
             }
             row.append(item);

@@ -41,6 +41,10 @@ table td.weekday{
 	background-color: #C4DC90;
 }
 
+table td.holiday{
+	background-color: #FF7501;
+}
+
 table th{
 	text-align: center;
 	height: 25px;
