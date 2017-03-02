@@ -24,3 +24,34 @@ body{
 	color: red;
 	padding-top: 10px;
 }
+
+table{
+	margin: 15px auto;
+}
+
+table .table-month td{
+	background-color: #E7F5CE;
+}
+
+table td.weekends{
+	background-color: #F8FB29;
+}
+
+table td.weekday{
+	background-color: #C4DC90;
+}
+
+table th{
+	text-align: center;
+	height: 25px;
+	width: 25px;
+}
+
+table td{
+	background-color: #CBCBCB;
+	text-align: center;
+	height: 25px;
+	width: 25px;
+	border: 1px solid white;
+}
+

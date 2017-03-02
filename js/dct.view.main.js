@@ -20,10 +20,13 @@
   }
 
   function _initCalendarForm(){
-    var element = $("#calendarForm");
+    var element = $("#calendarForm"),
+        settings = {
+          container: ".results"
+        };
     if(Component.CalendarForm){
       Wrapper.Component.CalendarForm = new Component.CalendarForm( Wrapper );
-      Wrapper.Component.CalendarForm.Init(element);
+      Wrapper.Component.CalendarForm.Init(element, settings);
     }
   }
 
